@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus3-oss-service
+  labels:
+    app: nexus3-oss
+spec:
+  ports:
+  - port: 8081
+    name: http
+  selector:
+    app: nexus3-oss
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus3-oss-loadbalancer-service
+  labels:
+    app: nexus3-oss
+spec:
+  ports:
+  - port: 80
+    targetPort: 8081
+  selector:
+    app: nexus3-oss
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nexus3-oss-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nexus3-oss
+        version: v1
+    spec:
+      containers:
+      - name: nexus3-oss
+        image: gcr.io/demo-testing/sonatype_nexus3:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+        volumeMounts:
+        - name: nexus3-oss-volume
+          mountPath: /nexus-data
+      volumes:
+      - name: nexus3-oss-volume
+        persistentVolumeClaim:
+          claimName: team-nfs
