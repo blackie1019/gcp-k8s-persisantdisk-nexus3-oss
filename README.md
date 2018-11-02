@@ -2,6 +2,14 @@
 
 最後結果 [http://35.229.249.41](http://35.229.249.41)
 
+## 設定當前專案 ##
+
+1. 建立一個新GCP專案並切換至該專案底下
+
+2. 安裝好本機 gcloud 指令並登入後即可設定當前預設專案
+
+  gcloud config set project nexus3-oss-demo
+
 ## 建立 一個 k8s 叢集 與 NTFS 服務 ##
 
 1. 建立 k8s 叢集服務
@@ -14,7 +22,7 @@
 
 3. 建立 NFS 服務
 
-  kubectl apply -f demo-testing-nfs.yaml
+  kubectl apply -f demo-testing-nfs-server.yaml
 
 4. 建立服務對外連結
 
