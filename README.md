@@ -32,9 +32,13 @@
   
   kubectl apply -f demo-testing-nfs-server-pv-pvc.yaml
 
-6. 進入 NFS Server 節點並給予對應資料夾權限讓資料可以成功寫入
+6. 確認當前 pods name
+   
+   kubectl get pods
+
+7. 進入 NFS Server 節點並給予對應資料夾權限讓資料可以成功寫入
   
-  kubectl exec -it nfs-server-66fcdd7546-j6jhs -c nfs-server bash
+  kubectl exec -it nfs-server-66fcdd7546-c7lfb -c nfs-server bash
   
   chmod -R 777 exports
 
