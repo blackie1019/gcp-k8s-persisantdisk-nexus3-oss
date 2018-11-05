@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: nexus3-oss
-        image: gcr.io/demo-testing/sonatype_nexus3:latest
+        image: gcr.io/nexus3_oss_demo/sonatype_nexus3:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8081
@@ -49,4 +49,4 @@ spec:
       volumes:
       - name: nexus3-oss-volume
         persistentVolumeClaim:
-          claimName: team-nfs
+          claimName: nexus-nfs
