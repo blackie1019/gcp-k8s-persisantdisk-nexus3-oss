@@ -26,7 +26,7 @@
 
 4. 建立服務對外連結
 
-    kubectl apply -f demo-testing-nfs-service.yaml
+    kubectl apply -f demo-testing-nfs-server-service.yaml
 
 5. 建立服務取用權限
   
