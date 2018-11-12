@@ -1,19 +1,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nexus3-oss-service
-  labels:
-    app: nexus3-oss
-spec:
-  ports:
-  - port: 8081
-    name: http
-  selector:
-    app: nexus3-oss
----
-apiVersion: v1
-kind: Service
-metadata:
   name: nexus3-oss-loadbalancer-service
   labels:
     app: nexus3-oss
@@ -21,6 +8,10 @@ spec:
   ports:
   - port: 80
     targetPort: 8081
+    name: http
+  - port: 8082
+    targetPort: 8082
+    name: http-docker
   selector:
     app: nexus3-oss
   type: LoadBalancer
@@ -43,6 +34,7 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8081
+        - containerPort: 8082
         volumeMounts:
         - name: nexus3-oss-volume
           mountPath: /nexus-data
